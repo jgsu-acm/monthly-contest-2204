@@ -1,16 +1,21 @@
 \documentclass{ctpro}
 
-\title{xxxxxx}
-\date{yyyy年mm月dd日}
+\title{ACM 算法与微应用实验室 2022 年 4 月月赛题目}
+\date{2022 年 4 月 30 日}
 
 \begin{document}
 
 \maketitle
-\addproblem{A+B Problem}{1000}{256}{传统}{aaa}
+\addproblem{FMVP}{1000}{256}{传统}{AgOH}
+\addproblem{最强阵容}{1000}{256}{传统}{AgOH}
+\addproblem{八保舟}{1000}{256}{传统}{AgOH}
+\addproblem{自古红蓝}{1000}{256}{传统}{AgOH}
+\addproblem{e}{1000}{256}{传统}{AgOH}
+\addproblem{f}{1000}{256}{传统}{Tifa}
 
 \section*{比赛信息}
 
-\ctinfotab{ACM个人赛}{C/C++,~Python,~Java}{3}
+\ctinfotab{ACM 个人赛}{C/C++,~Python,~Java}{3}
 
 \section*{题目概况}
 
@@ -23,7 +28,7 @@
 \section*{注意事项}
 
 \begin{itemize}
-    \item C/C++ 中函数 \verb|main()| 的返回值类型必须是 \verb|int|，程序正常结束时的返回值必须是 0。
+    \item C/C++ 中函数 \verb|main()| 的返回值类型必须是 \verb|int|，程序正常结束时的返回值必须是 $0$。
     \item C/C++ 代码必须完全符合 GNU C/C++ 标准，不能使用诸如绘图、Win32API、中断调用、硬件操作或与操作系统相关的API。
     \item C/C++ 代码中允许使用 STL 类库。
 \end{itemize}
@@ -33,31 +38,219 @@
 \makeproblem
 \section*{题目描述}
 
-输入两个整数 $a,b$，输出它们的和。
+在 4 月 26 日刚刚结束的 CBA 总决赛中，辽宁本钢队以 4:0 的大比分击败了浙江广厦队，获得了队史第二座总冠军奖杯。
+
+根据 CBA 联赛的规则，总决赛系列赛中场均 SPR 值最高的球员将会获得总决赛 MVP 的称号。现给出每名球员每场比赛的 SPR 值，请你帮 CBA 联盟评选出谁是总决赛 MVP。
 
 \section*{输入格式}
 
-一行，两个整数 $a,b~(1 \leq a,b \leq 10^9)$。
+第一行，一个整数 $n$，代表共有 $n$ 名球员有资格评选总决赛 MVP。
+
+接下来 $n$ 行，每行一个字符串和四个实数，依次代表球员的名字和其总决赛每场比赛的 SPR 值。
+
+数据保证：
+
+\begin{itemize}
+    \item 球员名字长度不超过 $20$，且内部不存在空格；
+    \item SPR 值的绝对值不超过 $20$；
+    \item 不会出现两个场均 SPR 值相同的球员。
+\end{itemize}
 
 \section*{输出格式}
 
-一个整数，代表 $a$ 与 $b$ 的和。
+一行，一个字符串，格式为：\texttt{x is the FMVP!}，\texttt{x} 为总决赛 MVP 球员的名字。
 
 \section*{输入输出样例}
 
 \testcasetab
 {
-    2 3
+    10\par
+    FuHao 10.5 5.8 -1.7 6.1\par
+    ZhaoJiwei 4.8 7.4 5.4 18.9\par
+    ZhouJuncheng 3.8 2.5 0 -2.3\par
+    ZhangZhenlin 3.1 5.6 5.7 3.5\par
+    CongMingchen 1.8 1.3 -2.4 0\par
+    GuoAilun 6.9 -8.3 7.6 0.1\par
+    KyleFogg 2.2 15.5 -0.1 3.8\par
+    LiXiaoxu 2.4 -0.8 1.1 4.5\par
+    EricMoreland 5.7 10.3 6.8 5.5\par
+    HanDejun 0 3.3 6.4 4.4
+}
+{
+    ZhaoJiwei is the FMVP!
+}
+
+\clearpage
+\section*{说明/提示}
+
+【样例解释】
+
+球员 ZhaoJiwei 的场均 SPR 值为：$\cfrac{4.8+7.4+5.4+18.9}{4} = 9.125$，为场均 SPR 最高的球员，故球员 ZhaoJiwei 为总决赛 MVP。
+
+\makeproblem
+\section*{题目描述}
+
+国际篮球联合会（FIBA）于 2020 年发布的规则的第 1.1 条部分内容如下：
+
+\begin{quote}
+    \textbf{1.1 Basketball game}
+
+    Basketball is played by 2 teams of 5 players each.
+\end{quote}
+
+即篮球比赛是由两队各派出五人进行对垒。
+
+每名球员有两个能力值：进攻效率和防守效率。一个五人阵容的实力为 $\cfrac{\text{五人进攻效率之和}}{\text{五人防守效率之和}}$。
+
+给定辽宁本钢队所有球员的进攻效率和防守效率，现在需要在所有球员中选出五个人组成一个五人阵容，请问这个阵容的实力的最大值是多少？
+
+\section*{输入格式}
+
+第一行，一个整数 $n~(5 \leq n \leq 2 \times {10}^5)$，代表辽宁本钢队共有多少名球员。
+
+接下来 $n$ 行，每行两个整数 $a_i,b_i~(1 \leq a_i,b_i \leq {10}^3)$，分别代表一名球员的进攻效率和防守效率。
+
+\section*{输出格式}
+
+一行，一个实数，代表能选出的实力最大的阵容的实力，保留 $6$ 位小数。
+
+\section*{输入输出样例}
+
+\testcasetab
+{
+    7\par
+    2 3\par
+    3 2\par
+    1 8\par
+    5 9\par
+    7 3\par
+    6 6\par
+    3 1
+}
+{
+    1.400000\par
+}
+
+\section*{说明/提示}
+
+【样例解释】
+
+最优选法为选择第 $1$、$2$、$5$、$6$、$7$ 名球员。
+
+\makeproblem
+\section*{题目描述}
+
+史尔特尔非常喜欢吃冰淇淋，夏天到了，她缠着博士给她买了好多好多个冰淇淋。
+
+每个冰淇淋都有一个快乐值 $h_i$，如果史尔特尔吃掉了这个冰淇淋，那么她自己的快乐值就会加上这个冰淇淋的快乐值。
+
+史尔特尔只能一个一个地吃冰淇淋，但是夏天很热，冰淇淋会很快地融化，史尔特尔每吃掉一个冰淇淋，其他冰淇淋就会因为融化导致其快乐值 $-1$，每个冰淇淋的快乐值最小只会扣减到 $0$。
+
+博士想让史尔特尔变得非常高兴，这样才能让她接受被医疗干员簇拥着永续黄昏的任务。史尔特尔初始的快乐值为 $42$，博士会给你 $q$ 次询问，每次询问一个区间 $[l,r]$，你需要帮博士算出只给史尔特尔吃第 $l,l+1,\cdots,r$ 个冰淇淋后史尔特尔能达到的最大快乐值是多少。
+
+\section*{输入格式}
+
+第一行，一个整数 $n,q~(1 \leq n,q \leq {10}^4)$，分别代表共有 $n$ 个冰淇淋以及博士的询问个数。
+
+第二行，$n$ 个整数 $h_i~(1 \leq h_i \leq {10}^5)$，代表每个冰淇淋的快乐值。
+
+接下来 $q$ 行，每行两个整数 $l,r~(1 \leq l \leq r \leq n)$，代表博士的一次询问。
+
+\section*{输出格式}
+
+共 $q$ 行，第 $i$ 行为博士的第 $i$ 次询问的答案。
+
+\section*{输入输出样例}
+
+\testcasetab
+{
+    5 5\par
+    1 3 5 7 9\par
+    1 3\par
+    2 4\par
+    3 5\par
+    1 4\par
+    2 5
+}
+{
+    7\par
+    12\par
+    18\par
+    12\par
+    18
+}
+
+\makeproblem
+\section*{题目描述}
+
+给定一个 $1 \times n$ 的矩形格条，你需要对每个格子涂上红色或者蓝色。但是两个红色的格子不允许相邻，请问共有多少种涂色的方案？
+
+因为答案可能很大，你只需要输出答案对 $998244353$ 取模的结果即可。
+
+\section*{输入格式}
+
+一行，一个整数 $n~(1 \leq n \leq {10}^{18})$。
+
+\section*{输出格式}
+
+一行，一个整数，代表答案。
+
+\section*{输入输出样例}
+
+\testcasetab
+{
+    3
 }
 {
     5
 }
+
 \testcasetab
 {
-    3 5
+    2333333
 }
 {
-    8
+    394054407
+}
+
+\section*{说明/提示}
+
+【样例解释 \#1】
+
+$5$ 种合法的涂色方法分别为：红蓝红，红蓝蓝，蓝红蓝，蓝蓝红，蓝蓝蓝。
+
+\makeproblem
+\section*{题目描述}
+
+\section*{输入格式}
+
+\section*{输出格式}
+
+\section*{输入输出样例}
+
+\testcasetab
+{
+
+}
+{
+
+}
+
+\makeproblem
+\section*{题目描述}
+
+\section*{输入格式}
+
+\section*{输出格式}
+
+\section*{输入输出样例}
+
+\testcasetab
+{
+
+}
+{
+
 }
 
 \end{document}
