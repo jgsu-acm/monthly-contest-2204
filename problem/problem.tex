@@ -305,9 +305,17 @@ $5$ 台计算机之间的连接关系如下：
 \makeproblem
 \section*{题目描述}
 
-在 \href{https://oj.learningman.top/p/A1006}{K-prime seive} 中我们曾给出了 $k$-素数和完全 $k$-素数的定义，现在我们将问题变一下型。
+给定定义如下：
 
-对给定的区间 $[l,r]$, 问 $[l,r]$ 中有多少 $k$-素数和完全 $k$-素数？
+\begin{definition}[$k$-素数]
+    恰好能表示为 $k$ 个素数乘积的数称为 $k$-素数
+\end{definition}
+
+\begin{definition}[完全 $k$-素数]
+    恰好能表示为 $k$ 个不同素数乘积的数称为完全 $k$-素数
+\end{definition}
+
+对于给定的区间 $[l,r]$，请问 $[l,r]$ 中有多少 $k$-素数和完全 $k$-素数？
 
 \section*{输入格式}
 
@@ -325,17 +333,17 @@ $5$ 台计算机之间的连接关系如下：
 
 \testcasetab
 {
-4\par
-1 1 1\par
-1 20 1\par
-1 10 2\par
-1 30 3
+    4\par
+    1 1 1\par
+    1 20 1\par
+    1 10 2\par
+    1 30 3
 }
 {
-0 0\par
-8 8\par
-4 2\par
-7 1
+    0 0\par
+    8 8\par
+    4 2\par
+    7 1
 }
 
 \end{document}
