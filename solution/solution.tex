@@ -29,6 +29,24 @@
 \makesolution
 \section*{做法}
 
+本题这种类型的题目叫做分数规划，通解是二分答案
+
+发现题目要求即：在所有 $(a_i,b_i)$ 中选出 $5$ 对：$(a_j,b_j)$，使得 $\cfrac{\sum_{i=j}^{5}a_j}{\sum_{i=j}^{5}b_j}$ 最大
+
+我们发现最大值这个东西是有单调性的，显然可以二分答案，而二分答案的关键在于 \verb|check| 函数的实现，设我们要判断的二分值为 $m$，则有：
+
+$$
+    \begin{aligned}
+                    & \cfrac{\sum_{i=j}^{5}a_j}{\sum_{i=j}^{5}b_j} > m \\
+        \Rightarrow & \sum_{i=j}^{5}a_j - m\sum_{i=j}^{5}b_j > 0 \\
+        \Rightarrow & \sum_{i=j}^{5}a_j-mb_j > 0
+    \end{aligned}
+$$
+
+也就是说只要我们能在所有 $(a_i,b_i)$ 中选出 $5$ 个 $(a_j,b_j)$ 使得 $\sum_{i=j}^{5}a_j-mb_j > 0$，那么我们的二分值 $m$ 就是满足条件的
+
+二分实数答案要注意精度问题（eps）
+
 \section*{标程}
 
 \std{B}
