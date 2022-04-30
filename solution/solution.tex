@@ -10,7 +10,7 @@
 \addsolution{最强阵容}{AgOH}{分数规划}
 \addsolution{八保舟}{AgOH}{莫队 + 值域线段树}
 \addsolution{自古红蓝}{AgOH}{动态规划 + 矩阵加速}
-\addsolution{e}{AgOH}{分层图最短路}
+\addsolution{一页地址}{AgOH}{分层图最短路}
 \addsolution{f}{Tifa}{模拟}
 
 \section*{题目概览}
@@ -43,6 +43,19 @@
 \makesolution
 \section*{做法}
 
+方案数，又不像是组合数学，考虑动态规划
+
+若最后一个格子未涂色，则倒数第二个格子可涂可不涂；若最后一个格子涂色了，则倒数第二个格子一定不能涂色，于是：
+
+\begin{itemize}
+    \item 状态设计：$dp[i]$ 代表已考虑了前 $i$ 个格子的方案数
+    \item 初始状态：$dp[1] = 2,~dp[2] = 3$
+    \item 转移方程：$dp[i] = dp[i-1] + dp[i-2]$
+    \item 所求结果：$dp[n]$
+\end{itemize}
+
+即斐波那契数列，注意到 $n \leq {10}^{18}$ 很大，需要使用矩阵加速
+
 \section*{标程}
 
 \std{D}
@@ -53,5 +66,12 @@
 \section*{标程}
 
 \std{E}
+
+\makesolution
+\section*{做法}
+
+\section*{标程}
+
+\std{F}
 
 \end{document}

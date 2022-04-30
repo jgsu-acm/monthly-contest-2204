@@ -51,8 +51,8 @@ int main()
         cin>>u>>v>>w;
         for(int j=0;j<=k;j++)
         {
-            AddEdge(u+j*n, v+j*n, w);
-            AddEdge(v+j*n, u+j*n, w);
+            AddEdge(u+j*n, v+j*n, 4*w);
+            AddEdge(v+j*n, u+j*n, 4*w);
             if(j==k) continue;
             AddEdge(u+j*n, v+(j+1)*n, 0);
             AddEdge(v+j*n, u+(j+1)*n, 0);
@@ -60,6 +60,8 @@ int main()
     }
     for(int i=1;i<=k;i++) AddEdge(n+(i-1)*n, n+i*n, 0);
     dijkstra(1);
-    cout<<dis[n+k*n]<<endl;
+    int ans = dis[n+k*n];
+    cout<<ans<<endl;
+    if(!ans) cout<<"Identified as: Purely Network Connection."<<endl;
     return 0;
 }
