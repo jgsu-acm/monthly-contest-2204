@@ -1,5 +1,6 @@
 \documentclass{ctpro}
 \usepackage{tikz}
+\usepackage{hyperref}
 
 \title{ACM 算法与微应用实验室 2022 年 4 月月赛题目}
 \date{2022 年 5 月 1 日}
@@ -12,7 +13,7 @@
 \addproblem{八保舟}{1000}{256}{传统}{AgOH}
 \addproblem{自古红蓝}{1000}{256}{传统}{AgOH}
 \addproblem{加密通信}{1000}{256}{传统}{AgOH}
-\addproblem{f}{1000}{256}{传统}{Tifa}
+\addproblem{K-prime seive 2}{1000}{256}{传统}{Tifa}
 
 \section*{比赛信息}
 
@@ -302,18 +303,37 @@ $5$ 种合法的涂色方法分别为：红蓝红，红蓝蓝，蓝红蓝，蓝�
 \makeproblem
 \section*{题目描述}
 
+在 \href{https://oj.learningman.top/p/A1006}{K-prime seive} 中我们曾给出了 $k$-素数和完全 $k$-素数的定义，现在我们将问题变一下型。
+
+对给定的区间 $[l,r]$, 问 $[l,r]$ 中有多少 $k$-素数和完全 $k$-素数？
+
 \section*{输入格式}
 
+多组数据。
+
+第一行为一个整数 $t~(1 \leq t \leq {10}^3)$，表示数据组数。
+
+接下来 $t$ 行每行有三个整数 $l,r,k~(1 \leq l<r \leq {10}^{12},~r-l\leq {10}^6,~0 \leq k \leq l)$，含义同描述。
+
 \section*{输出格式}
+
+每组数据输出一行，每行输出两个数，第一个数为 $[l,r]$ 中所有 $k$-素数的个数，第二个数为 $[l,r]$ 中所有完全 $k$-素数的个数。两个数之间间隔一个空格
 
 \section*{输入输出样例}
 
 \testcasetab
 {
-
+4\par
+1 1 1\par
+1 20 1\par
+1 10 2\par
+1 30 3
 }
 {
-
+0 0\par
+8 8\par
+4 2\par
+7 1
 }
 
 \end{document}
