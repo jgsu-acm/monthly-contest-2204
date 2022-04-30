@@ -1,4 +1,5 @@
 \documentclass{ctsol}
+\usepackage{tikz}
 
 \title{ACM 算法与微应用实验室 2022 年 4 月月赛题解}
 \date{2022 年 5 月 1 日}
@@ -95,6 +96,70 @@ $$
 \makesolution
 \section*{做法}
 
+设所给图为 $G_0=(V_0,E_0)$，将其复制 $k$ 份，分别记为 $G_1=(V_1,E_1),G_2=(V_2,E_2),\cdots,G_k=(V_k,E_k)$
+
+设图 $G_i$ 中所有结点为 $u_{i,1},u_{i,2},\cdots,u_{i,m}$，对于所有结点 $u_{i,j} \in G_i~(i \neq k)$，连边：
+
+$$u_{i,j} \xrightarrow{0} u_{i+1,t}~(u_{i,j} \rightarrow u_{i,t} \in E_i)$$
+
+然后从 $u_{0,1}$ 结点开始跑一遍单源最短路径，答案即为：
+
+$$\min\limits_{i=0}^{k}dis[u_{i,n}]$$
+
+当然也可以用边把 $u_{0,n},u_{1,n},\cdots,u_{k,n}$ 这几个结点用边权为 $0$ 的边连接起来，然后答案即为 $dis[u_{k,n}]$
+
+举个例子，第一个样例连边后所形成的图为：
+
+\begin{center}
+    \begin{tikzpicture}
+    [
+        shorten >=1pt, auto, node distance=3cm, ultra thick,
+        node0_style/.style={circle,draw=black},
+        edge0_style/.style={draw=black, ultra thick},
+        node1_style/.style={circle,draw=blue},
+        edge1_style/.style={draw=blue, ultra thick},
+        edgec_style/.style={draw=red, ultra thick, dashed}
+    ]
+        \node[node0_style] (v01) at (1,6) {0,1};
+        \node[node0_style] (v02) at (-1,4) {0,2};
+        \node[node0_style] (v03) at (3,4) {0,3};
+        \node[node0_style] (v04) at (3,6) {0,4};
+        \node[node0_style] (v05) at (5,4) {0,5};
+        \draw[edge0_style] (v01) edge node{2} (v02);
+        \draw[edge0_style] (v02) edge node{2} (v03);
+        \draw[edge0_style] (v01) edge node{3} (v04);
+        \draw[edge0_style] (v04) edge node{3} (v05);
+        \draw[edge0_style] (v03) edge node{2} (v05);
+    
+        \node[node1_style] (v11) at (1,1) {1,1};
+        \node[node1_style] (v12) at (0,3) {1,2};
+        \node[node1_style] (v13) at (-1,0) {1,3};
+        \node[node1_style] (v14) at (2,3) {1,4};
+        \node[node1_style] (v15) at (5,0) {1,5};
+        \draw[edge1_style] (v11) edge node{2} (v12);
+        \draw[edge1_style] (v12) edge node{2} (v13);
+        \draw[edge1_style] (v11) edge node{3} (v14);
+        \draw[edge1_style] (v14) edge node{3} (v15);
+        \draw[edge1_style] (v13) edge node{2} (v15);
+    
+        \draw[edgec_style] (v01) -- (v12);
+        \draw[edgec_style] (v02) -- (v13);
+        \draw[edgec_style] (v01) -- (v14);
+        \draw[edgec_style] (v04) -- (v15);
+        \draw[edgec_style] (v03) -- (v15);
+    
+        \node[text=black] at (6,5) {$G_0$};
+        \node[text=blue] at (6,1) {$G_1$};
+    \end{tikzpicture}
+\end{center}
+
+从结点 $u_{0,1}$ 开始跑一遍单源最短路径，可以发现 $dis[u_{0,n}]=6,dis[u_{1,n}]=3$，故答案为：
+
+$$\min(dis[u_{0,n}],dis[u_{1,n}])=3$$
+
+这种拆点后跑最短路的方法叫做分层图最短路
+
+\clearpage
 \section*{标程}
 
 \std{E}
