@@ -58,8 +58,6 @@ inline void add(int p) { modify(a[p], 1); }
 inline void sub(int p) { modify(a[p], -1); }
 int main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
     build(1,1e5);
     int n,m;
     cin>>n>>m;

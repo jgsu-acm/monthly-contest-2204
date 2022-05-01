@@ -16,8 +16,6 @@ bool check(double m)
 }
 int main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
     cin>>n;
     for(int i=1;i<=n;i++) cin>>a[i]>>b[i];
     double l=0, r=5e7;

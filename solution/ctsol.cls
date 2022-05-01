@@ -82,6 +82,7 @@
         numbers=left,
         breaklines=true,
         xleftmargin=.25in,
-        xrightmargin=.25in
+        xrightmargin=.25in,
+        basicstyle=\ttfamily\scriptsize
     ]{../std/#1.cpp}
 }

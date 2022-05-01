@@ -19,8 +19,7 @@ priority_queue<pii, vector<pii>, greater<pii>> pq;
 void dijkstra(int s)
 {
     memset(dis, 0x3f, sizeof(dis));
-    dis[s] = 0;
-    pq.emplace(0, s);
+    dis[s] = 0; pq.emplace(0, s);
     while(!pq.empty())
     {
         int u = pq.top().second;
@@ -40,8 +39,6 @@ void dijkstra(int s)
 }
 int main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
     memset(Head, -1, sizeof(Head));
     int n,m,k;
     cin>>n>>m>>k;
@@ -60,8 +57,7 @@ int main()
     }
     for(int i=1;i<=k;i++) AddEdge(n+(i-1)*n, n+i*n, 0);
     dijkstra(1);
-    int ans = dis[n+k*n]*4;
-    cout<<ans<<endl;
-    if(!ans) cout<<"Identified as: Purely Network Connection."<<endl;
+    cout<<dis[n+k*n]*4<<endl;
+    if(!dis[n+k*n]) cout<<"Identified as: Purely Network Connection."<<endl;
     return 0;
 }
