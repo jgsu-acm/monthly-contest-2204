@@ -1,4 +1,4 @@
-\documentclass{ctsol}
+\documentclass{../cpct/ctsol}
 \usepackage{tikz}
 
 \title{ACM 算法与微应用实验室 2022 年 4 月月赛题解}
@@ -9,7 +9,7 @@
 \maketitle
 \addsolution{FMVP}{AgOH}{排序}
 \addsolution{最强阵容}{AgOH}{分数规划}
-\addsolution{八保舟}{AgOH}{莫队 + 值域线段树}
+\addsolution{八保舟}{AgOH}{$\times$}
 \addsolution{自古红蓝}{AgOH}{动态规划 + 矩阵加速}
 \addsolution{5Yqg5a+G6YCa5L+h}{AgOH}{分层图最短路}
 \addsolution{K-prime seive 2}{Tifa}{线性筛}
@@ -59,23 +59,7 @@ $$
 \makesolution
 \section*{做法}
 
-容易发现，对于一个区间 $[l,r]$ 来说，能获得的最大总快乐值一定是贪心地先吃最大快乐值的冰淇淋，直到没有冰淇淋或剩余的冰淇淋的快乐值都为 $0$ 为止
-
-因为所有冰淇淋一起减 $1$，相当于没减，所以一定要抢吃最大快乐值的冰淇淋
-
-那么可以发现，快乐值小于区间长度一半的冰淇淋必然不会对最大总快乐值产生贡献，因为该吃它们的时候快乐值已经扣没了
-
-于是对于整个区间内的冰淇淋来说，能获得的最大总快乐值为 $s-\cfrac{c(c-1)}{2}$，其中 $s$ 为快乐值大于区间长度一半的快乐值的总和，$c$ 为快乐值大于区间长度一半的快乐值的数量
-
-例如对于快乐值为 $1,2,3,4,5$ 的五个冰淇淋来说，能获得的快乐值即为：
-
-$$5+4+3-(1+2) = 5+4+3-\cfrac{3 \times (3-1)}{2} = 9$$
-
-值域不大只有 ${10}^5$，可以考虑使用值域线段树维护
-
 \section*{标程}
-
-\std{C}
 
 \makesolution
 \section*{做法}
